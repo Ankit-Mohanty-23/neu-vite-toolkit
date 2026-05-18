@@ -1,0 +1,35 @@
+{
+  "applicationId": "js.neutralino.myneuapp",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "logging": {
+    "enabled": true,
+    "writeToLogFile": true
+  },
+  "modes": {
+    "window": {
+      "title": "my-neu-app",
+      "width": 1200,
+      "height": 800,
+      "minWidth": 800,
+      "minHeight": 600,
+      "enableInspector": false,
+      "borderless": false,
+      "maximize": false,
+      "hidden": false,
+      "resizable": true,
+      "exitProcessOnClose": true
+    }
+  },
+  "cli": {
+    "binaryName": "my-neu-app",
+    "resourcesPath": "/dist/",
+    "extensionsPath": "/extensions/",
+    "defaultExtensionsPath": "/extensions/",
+    "clientLibrary": "/node_modules/@neutralinojs/lib/dist/neutralino.js",
+    "frontendLibrary": {
+      "patchFile": "/index.html",
+      "devUrl": "http://localhost:5173"
+    }
+  }
+}

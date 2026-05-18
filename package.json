@@ -1,0 +1,7 @@
+{
+  "name": "neu-vite-toolkit",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
