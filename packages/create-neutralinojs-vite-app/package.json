@@ -6,6 +6,9 @@
   "bin": {
     "create-neutralinojs-vite-app": "dist/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -44,6 +47,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ankit-Mohanty-23/create-neutralinojs-vite-app"
+    "url": "git+https://github.com/Ankit-Mohanty-23/create-neutralinojs-vite-app.git"
   }
 }
