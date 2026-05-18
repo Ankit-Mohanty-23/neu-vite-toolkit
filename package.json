@@ -2,6 +2,7 @@
   "name": "neu-vite-toolkit",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/create-neutralinojs-vite-app",
+    "packages/vite-plugin-neu-bridge"
   ]
 }
