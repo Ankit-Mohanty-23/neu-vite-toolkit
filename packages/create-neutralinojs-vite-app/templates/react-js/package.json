@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"vite\" \"neu run\"",
+    "dev": "node scripts/dev.mjs",
     "build": "vite build && neu build",
     "neu:update": "neu update",
     "preview": "vite preview"
