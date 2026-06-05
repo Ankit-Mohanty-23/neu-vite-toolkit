@@ -16,7 +16,7 @@ program
   .description(
     "Create a Neutralinojs + Vite app with React, pre-configured and ready to run."
   )
-  .version("1.0.0")
+  .version("2.0.0")
   .argument("[project-name]", "Name of the project to create")
   .action(async (projectNameArg: string | undefined) => {
     console.log();
