@@ -20,9 +20,10 @@ npx create-neutralinojs-vite-app
 
 - ⚡ **Vite** — instant HMR, fast builds
 - ⚛️ **React 18** — with JS or TypeScript
-- 🖥️ **Neutralinojs** — pre-configured `neutralino.config.json` pointed at Vite dev server (`localhost:5173`)
+- 🖥️ **Neutralinojs** — pre-configured `neutralino.config.json` that stays in sync with Vite
+- 🔌 **Auto Port Resolution (v2.0+)** — dynamically finds a free port to avoid conflicts between Vite and Neutralino
 - 🎨 **Prettier** — baked into every template
-- 📦 **concurrently** — `npm run dev` starts Vite and Neutralinojs together
+- 📦 **concurrently** — `npm run dev` safely starts Vite and Neutralinojs together on the resolved port
 
 ## After scaffolding
 
