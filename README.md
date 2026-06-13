@@ -16,6 +16,18 @@ Or pass no arguments for interactive mode:
 npx create-neutralinojs-vite-app
 ```
 
+### CLI Options
+
+You can bypass interactive prompts (ideal for CI/CD or headless environments) by passing flags:
+
+- `-t, --template <name>`: Specify the template to use directly (`react-js` or `react-ts`).
+- `-f, --force`: Overwrite the target directory if it already exists without asking for confirmation.
+
+Example:
+```bash
+npx create-neutralinojs-vite-app my-app --template react-ts --force
+```
+
 ## What you get
 
 - ⚡ **Vite** — instant HMR, fast builds
@@ -36,10 +48,10 @@ npm run dev          # starts Vite + Neutralinojs
 
 ## Templates
 
-| Template | Command |
-|----------|---------|
-| React + Vite + JavaScript | `npx create-neutralinojs-vite-app` → No TypeScript |
-| React + Vite + TypeScript | `npx create-neutralinojs-vite-app` → Yes TypeScript |
+| Template | Command | Headless Flag |
+|----------|---------|---------------|
+| React + Vite + JavaScript | `npx create-neutralinojs-vite-app` → No TypeScript | `--template react-js` |
+| React + Vite + TypeScript | `npx create-neutralinojs-vite-app` → Yes TypeScript | `--template react-ts` |
 
 ## Why this exists
 

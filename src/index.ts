@@ -16,9 +16,11 @@ program
   .description(
     "Create a Neutralinojs + Vite app with React, pre-configured and ready to run."
   )
-  .version("2.0.0")
+  .version("2.1.0")
   .argument("[project-name]", "Name of the project to create")
-  .action(async (projectNameArg: string | undefined) => {
+  .option("-t, --template <name>", "Template to use (react-js, react-ts)")
+  .option("-f, --force", "Overwrite target directory if it exists")
+  .action(async (projectNameArg: string | undefined, options) => {
     console.log();
     console.log(
       chalk.bold.cyan("  create-neutralinojs-vite-app") +
@@ -45,32 +47,43 @@ program
       projectName = response.projectName;
     }
 
-    // Step 2: TypeScript prompt
-    const { useTypeScript } = await prompt({
-      type: "confirm",
-      name: "useTypeScript",
-      message: "Use TypeScript?",
-      initial: true,
-    });
+    // Step 2: Template / TypeScript prompt
+    let template: string = options.template || "";
 
-    const template: string = useTypeScript ? "react-ts" : "react-js";
+    if (!template) {
+      const { useTypeScript } = await prompt({
+        type: "confirm",
+        name: "useTypeScript",
+        message: "Use TypeScript?",
+        initial: true,
+      });
+      template = useTypeScript ? "react-ts" : "react-js";
+    } else if (template !== "react-js" && template !== "react-ts") {
+      console.log(chalk.red(`\n  Invalid template "${template}". Valid options are: react-js, react-ts.`));
+      process.exit(1);
+    }
+
     const targetDir: string = path.resolve(process.cwd(), projectName);
 
     // Step 3: Check if directory already exists
     if (fs.existsSync(targetDir)) {
-      const { overwrite } = await prompt({
-        type: "confirm",
-        name: "overwrite",
-        message: `Directory "${projectName}" already exists. Overwrite?`,
-        initial: false,
-      });
+      if (options.force) {
+        await fs.remove(targetDir);
+      } else {
+        const { overwrite } = await prompt({
+          type: "confirm",
+          name: "overwrite",
+          message: `Directory "${projectName}" already exists. Overwrite?`,
+          initial: false,
+        });
 
-      if (!overwrite) {
-        console.log(chalk.yellow("\n  Aborted."));
-        process.exit(0);
+        if (!overwrite) {
+          console.log(chalk.yellow("\n  Aborted."));
+          process.exit(0);
+        }
+
+        await fs.remove(targetDir);
       }
-
-      await fs.remove(targetDir);
     }
 
     // Step 4: Scaffold
