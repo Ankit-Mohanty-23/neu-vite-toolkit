@@ -1,6 +1,6 @@
 {
   "name": "create-neutralinojs-vite-app",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Create a Neutralinojs + Vite app with one command — React templates with JS or TypeScript, pre-configured and ready to run.",
   "type": "module",
   "main": "dist/index.js",

@@ -19,7 +19,7 @@ program
   .description(
     "Create a Neutralinojs + Vite app with React, pre-configured and ready to run."
   )
-  .version("2.1.1")
+  .version("2.1.2")
   .argument("[project-name]", "Name of the project to create")
   .option("-t, --template <name>", "Template to use (react-js, react-ts)")
   .option("-f, --force", "Overwrite target directory if it exists")
@@ -110,7 +110,10 @@ program
       }
 
       await fs.copy(templateDir, targetDir, {
-        filter: (src: string) => !src.includes("node_modules"),
+        filter: (src: string) => {
+          const rel = path.relative(templateDir, src);
+          return !rel.split(path.sep).includes("node_modules");
+        },
       });
 
       // Inject project name into package.json
