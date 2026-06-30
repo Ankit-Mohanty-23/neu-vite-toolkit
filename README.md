@@ -7,13 +7,13 @@ Neutralinojs is a lightweight alternative to Electron — no bundled browser eng
 ## Usage
 
 ```bash
-npx create-neutralinojs-vite-app my-app
+npx create-neutralinojs-vite-app@latest my-app
 ```
 
 Or pass no arguments for interactive mode:
 
 ```bash
-npx create-neutralinojs-vite-app
+npx create-neutralinojs-vite-app@latest
 ```
 
 ### CLI Options
@@ -24,9 +24,14 @@ You can bypass interactive prompts (ideal for CI/CD or headless environments) by
 - `-t, --template <name>`: Specify the template to use directly (`react-js` or `react-ts`).
 - `-f, --force`: Overwrite the target directory if it already exists without asking for confirmation.
 
-Example:
+Example (TypeScript):
 ```bash
-npx create-neutralinojs-vite-app my-app --yes
+npx create-neutralinojs-vite-app@latest my-app --yes
+```
+
+Example (JavaScript):
+```bash
+npx create-neutralinojs-vite-app@latest my-app --template react-js --force
 ```
 
 ## What you get
