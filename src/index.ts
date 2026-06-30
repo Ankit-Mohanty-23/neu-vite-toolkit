@@ -5,9 +5,12 @@ import chalk from "chalk";
 import ora from "ora";
 import fs from "fs-extra";
 import path from "path";
+import { fileURLToPath } from "url";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { prompt } = require("enquirer");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import { input, confirm } from "@inquirer/prompts";
 
 const program = new Command();
 
@@ -16,10 +19,11 @@ program
   .description(
     "Create a Neutralinojs + Vite app with React, pre-configured and ready to run."
   )
-  .version("2.1.0")
+  .version("2.1.1")
   .argument("[project-name]", "Name of the project to create")
   .option("-t, --template <name>", "Template to use (react-js, react-ts)")
   .option("-f, --force", "Overwrite target directory if it exists")
+  .option("-y, --yes", "Skip prompts and use defaults (React-TS, overwrite)")
   .action(async (projectNameArg: string | undefined, options) => {
     console.log();
     console.log(
@@ -32,32 +36,35 @@ program
     let projectName: string = projectNameArg || "";
 
     if (!projectName) {
-      const response = await prompt({
-        type: "input",
-        name: "projectName",
-        message: "Project name:",
-        initial: "my-neu-app",
-        validate: (value: string) => {
-          if (!value.trim()) return "Project name cannot be empty.";
-          if (!/^[a-z0-9-_]+$/i.test(value))
-            return "Project name can only contain letters, numbers, hyphens, and underscores.";
-          return true;
-        },
-      });
-      projectName = response.projectName;
+      if (options.yes) {
+        projectName = "my-neu-app";
+      } else {
+        projectName = await input({
+          message: "Project name:",
+          default: "my-neu-app",
+          validate: (value: string) => {
+            if (!value.trim()) return "Project name cannot be empty.";
+            if (!/^[a-z0-9-_]+$/i.test(value))
+              return "Project name can only contain letters, numbers, hyphens, and underscores.";
+            return true;
+          },
+        });
+      }
     }
 
     // Step 2: Template / TypeScript prompt
     let template: string = options.template || "";
 
     if (!template) {
-      const { useTypeScript } = await prompt({
-        type: "confirm",
-        name: "useTypeScript",
-        message: "Use TypeScript?",
-        initial: true,
-      });
-      template = useTypeScript ? "react-ts" : "react-js";
+      if (options.yes) {
+        template = "react-ts";
+      } else {
+        const useTypeScript = await confirm({
+          message: "Use TypeScript?",
+          default: true,
+        });
+        template = useTypeScript ? "react-ts" : "react-js";
+      }
     } else if (template !== "react-js" && template !== "react-ts") {
       console.log(chalk.red(`\n  Invalid template "${template}". Valid options are: react-js, react-ts.`));
       process.exit(1);
@@ -67,14 +74,12 @@ program
 
     // Step 3: Check if directory already exists
     if (fs.existsSync(targetDir)) {
-      if (options.force) {
+      if (options.force || options.yes) {
         await fs.remove(targetDir);
       } else {
-        const { overwrite } = await prompt({
-          type: "confirm",
-          name: "overwrite",
+        const overwrite = await confirm({
           message: `Directory "${projectName}" already exists. Overwrite?`,
-          initial: false,
+          default: false,
         });
 
         if (!overwrite) {

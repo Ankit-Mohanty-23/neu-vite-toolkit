@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@neutralinojs/lib": "^6.8.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@neutralinojs/neu": "^11.7.2",
-    "@vitejs/plugin-react": "^4.2.0",
-    "concurrently": "^8.2.0",
+    "@vitejs/plugin-react": "^6.0.0",
+    "concurrently": "^10.0.0",
     "prettier": "^3.2.0",
-    "vite": "^5.2.0"
+    "vite": "^8.1.0"
   }
 }
