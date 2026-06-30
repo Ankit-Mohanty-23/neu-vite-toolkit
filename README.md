@@ -20,18 +20,19 @@ npx create-neutralinojs-vite-app
 
 You can bypass interactive prompts (ideal for CI/CD or headless environments) by passing flags:
 
+- `-y, --yes`: Skip all interactive prompts entirely and use default values (`react-ts` template) while automatically overwriting any existing directories.
 - `-t, --template <name>`: Specify the template to use directly (`react-js` or `react-ts`).
 - `-f, --force`: Overwrite the target directory if it already exists without asking for confirmation.
 
 Example:
 ```bash
-npx create-neutralinojs-vite-app my-app --template react-ts --force
+npx create-neutralinojs-vite-app my-app --yes
 ```
 
 ## What you get
 
-- ⚡ **Vite** — instant HMR, fast builds
-- ⚛️ **React 18** — with JS or TypeScript
+- ⚡ **Vite 8** — instant HMR, fast builds
+- ⚛️ **React 19** — with JS or TypeScript 6
 - 🖥️ **Neutralinojs** — pre-configured `neutralino.config.json` that stays in sync with Vite
 - 🔌 **Auto Port Resolution (v2.0+)** — dynamically finds a free port to avoid conflicts between Vite and Neutralino
 - 🎨 **Prettier** — baked into every template
